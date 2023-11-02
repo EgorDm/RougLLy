@@ -1,22 +1,27 @@
 import React from "react";
 import {Accordion, AccordionDetails, AccordionSummary, Box, Typography} from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import {useEstimationContext} from "../../providers/EstimationProvider";
 
 
 function CostsPanel() {
+    const {calculation: {processing, generation}} = useEstimationContext();
+
     return (
         <React.Fragment>
+
             <Accordion>
                 <AccordionSummary aria-controls="panel1d-content" id="panel1d-header"
                                   expandIcon={<ExpandMoreIcon/>}>
                     <Box sx={{ width: '66%', flexShrink: 0 }}>
                         <Typography display="inline">
-                            Output Cost
+                            Input Cost
                         </Typography>
                     </Box>
+
                     <Box>
                         <Typography sx={{ color: 'text.secondary' }} display="inline">
-                            $0.0015
+                            ${generation.costPer1KTokens}
                         </Typography>
                         {' '}
                         <Typography sx={{ color: 'text.secondary' }} display="inline" variant="caption">
@@ -38,13 +43,12 @@ function CostsPanel() {
                                   expandIcon={<ExpandMoreIcon/>}>
                     <Box sx={{ width: '66%', flexShrink: 0 }}>
                         <Typography display="inline">
-                            Input Cost
+                            Output Cost
                         </Typography>
                     </Box>
-
                     <Box>
                         <Typography sx={{ color: 'text.secondary' }} display="inline">
-                            $0.002
+                            ${processing.costPer1KTokens}
                         </Typography>
                         {' '}
                         <Typography sx={{ color: 'text.secondary' }} display="inline" variant="caption">

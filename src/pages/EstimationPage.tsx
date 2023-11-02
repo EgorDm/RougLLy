@@ -1,12 +1,13 @@
-import ConfigurationPanel from "../containers/estimation/ConfigurationPanel";
+import ConfigurationPanel from "../containers/estimation/configuration_panel/ConfigurationPanel";
 import {Box, Divider, Paper, Stack} from "@mui/material";
-import DetailsPanel from "../containers/estimation/DetailsPanel";
+import DetailsPanel from "../containers/estimation/details_panel/DetailsPanel";
 import CostsPanel from "../containers/estimation/CostsPanel";
 import React from "react";
+import {EstimationProvider} from "../providers/EstimationProvider";
 
 function EstimationPage() {
     return (
-        <React.Fragment>
+        <EstimationProvider>
             <ConfigurationPanel/>
             <Divider sx={{mt: 2, mb: 2}}/>
             <Stack flexGrow={1}>
@@ -17,7 +18,7 @@ function EstimationPage() {
                     <CostsPanel/>
                 </Box>
             </Paper>
-        </React.Fragment>
+        </EstimationProvider>
     )
 }
 

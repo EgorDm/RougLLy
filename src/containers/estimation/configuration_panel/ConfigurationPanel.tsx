@@ -12,6 +12,8 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import React from "react";
+import {ModelSelection} from "./ModelSelection";
+import {InstanceSelection} from "./InstanceSelection";
 
 const Accordion = styled((props: AccordionProps) => (
     <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -85,20 +87,10 @@ function ConfigurationPanel() {
         <Stack>
             <Container maxWidth="sm">
                 <Box alignItems="center">
-                    <Autocomplete
-                        disablePortal
-                        id="combo-box-demo"
-                        options={[]}
-                        renderInput={(params) => <TextField {...params} label="Model"/>}
-                    />
+                    <ModelSelection/>
                 </Box>
                 <Box sx={{pt: 2}} alignItems="center">
-                    <Autocomplete
-                        disablePortal
-                        id="combo-box-demo"
-                        options={[]}
-                        renderInput={(params) => <TextField {...params} label="Instance"/>}
-                    />
+                    <InstanceSelection/>
                 </Box>
             </Container>
             <Container maxWidth="sm" sx={{pt: 2}}>
