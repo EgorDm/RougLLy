@@ -10,7 +10,6 @@ export function formatScaleUnitNumber(
 
     const i = Math.floor(Math.log(value) / Math.log(k))
 
-    console.log(value, parseFloat((value / Math.pow(k, i)).toFixed(dm)))
     return `${(value / Math.pow(k, i)).toFixed(dm)} ${scales[i]}`
 }
 

@@ -36,7 +36,7 @@ export const calculateLLaMA: CalculationFn = (
 
     const processingComputeBandwidthRequirement = modelSizeBytes;
     const processingComputeBoundThreshold = totalFp16MatmulFlopsAdjusted / processingComputeBandwidthRequirement;
-    const processingThroughput = totalFp16MatmulFlopsAdjusted / processingComputeBoundThreshold;
+    const processingThroughput = processingComputeBoundThreshold;
     const processingCost = (instancePricePerSecond / processingThroughput) * 1000;
 
     const generationLatency = (model.maxSeqLength * batchSize * modelSizeBytes) / totalFp16MatmulFlopsAdjusted;
@@ -46,6 +46,7 @@ export const calculateLLaMA: CalculationFn = (
     const generationCost = generationCostSingle / batchSize;
 
     return {
+        recommendedBatchSize,
         groups: [
             {
                 name: 'Calculation Constants',
@@ -213,6 +214,17 @@ export const calculateLLaMA: CalculationFn = (
                     display: {
                         label: "Generation Cost (Single) per 1k Tokens",
                         info: "The number of tokens that can be generated per dollar for single generation."
+                    }
+                },
+                {
+                    value: {
+                        value: generationThroughput,
+                        unit: "tokens/second",
+                        precision: 2
+                    },
+                    display: {
+                        label: "Generation Throughput (Batch)",
+                        info: "The number of tokens that can be generated per second for batch generation."
                     }
                 },
             ],

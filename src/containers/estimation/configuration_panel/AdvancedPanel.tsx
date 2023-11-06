@@ -15,6 +15,8 @@ import React from "react";
 import QuantizationSelector from "../../../components/input/QuantizationSelector";
 import {useEstimationContext} from "../../../providers/EstimationProvider";
 import PrecisionSelector from "../../../components/input/PrecisionSelector";
+import BatchSizeSelector from "../../../components/input/BatchSizeSelector";
+import LabeledSlider from "../../../components/input/LabeledSlider";
 
 
 const Accordion = styled((props: AccordionProps) => (
@@ -49,10 +51,8 @@ const AccordionSummary = styled((props: AccordionSummaryProps) => (
 }));
 
 
-
-
 export function AdvancedPanel() {
-    const {params, setParams} = useEstimationContext();
+    const {params, calculation, setParams} = useEstimationContext();
 
     const setParamsPartial = (paramsPartial: Partial<typeof params>) => {
         setParams({...params, ...paramsPartial})
@@ -74,36 +74,28 @@ export function AdvancedPanel() {
                         onChange={(quantization) => setParamsPartial({quantization})}
                     />
                 </Stack>
-
-
                 <Stack spacing={1.5} sx={{minWidth: 300, mt: 2}}>
-                    <TextField
-                        type="number" inputProps={{inputMode: 'numeric', pattern: '[0-9]*'}}
-                        value={5}
-                        label="Batch Size"
-                        InputProps={{
-                            endAdornment: <InputAdornment position="start">
-                                <FormControlLabel control={<Checkbox/>} label="Recommended"
-                                                  sx={{ml: 0, mr: 0}}/>
-                            </InputAdornment>,
-                        }}
+                    <BatchSizeSelector
+                        value={params.batchSize}
+                        defaultValue={calculation.recommendedBatchSize}
+                        onChange={(batchSize) => setParamsPartial({batchSize})}
                     />
                 </Stack>
-                <Box sx={{mt: 2}}>
-                    <Typography variant="caption" gutterBottom>
-                        Utilization
-                    </Typography>
-                    <Slider
-                        track="inverted"
-                        aria-labelledby="track-inverted-slider"
-                        min={10}
-                        max={100}
-                        defaultValue={70}
-                        step={10}
-                        marks
-                        valueLabelDisplay="auto"
-                    />
-                </Box>
+                <LabeledSlider
+                    sx={{mt: 2}}
+                    label="Utilization"
+                    min={10}
+                    max={100}
+                    value={Math.round(params.processingUtilization * 100)}
+                    onChange={(e, value) => setParamsPartial({
+                        processingUtilization: value as number / 100,
+                        generationUtilization: value as number / 100,
+                    })}
+                    defaultValue={70}
+                    step={10}
+                    marks
+                    valueLabelDisplay="auto"
+                />
             </AccordionDetails>
         </Accordion>
     )

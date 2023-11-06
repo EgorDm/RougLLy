@@ -40,9 +40,7 @@ function QuantizationSelector(
         onChange: (value: string) => void,
     }
 ) {
-    const options = [
-        {value: 'none', label: 'none'},
-    ].concat(OPTIONS[precisionBits] ?? []);
+    const options = OPTIONS[precisionBits] ?? [{value: 'none', label: 'none'}];
 
     const valueInOptions = options.find(option => option.value === value);
 
@@ -53,7 +51,7 @@ function QuantizationSelector(
             <Select
                 labelId="quantization-label"
                 label="Quantization"
-                value={valueInOptions ? value : 'none'}
+                value={valueInOptions ? value : options[0].value}
                 disabled={options.length === 1}
                 onChange={(e) => onChange(e.target.value as string)}
             >

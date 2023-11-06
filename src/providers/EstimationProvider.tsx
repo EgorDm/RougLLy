@@ -12,7 +12,7 @@ const EstimationContext = React.createContext<{
 
 export const EstimationProvider = ({children}: { children: React.ReactNode }) => {
     const [params, setParams] = React.useState<EstimationParams>({
-        model: MODELS[0],
+        model: MODELS[2],
         instance: INSTANCES[0],
 
         processingUtilization: 0.7,

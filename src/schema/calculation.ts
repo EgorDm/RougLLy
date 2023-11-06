@@ -19,6 +19,7 @@ export type CalculationFn = (params: EstimationParams) => Calculation;
 export interface Calculation {
     groups: CalculationGroup[];
 
+    recommendedBatchSize: number;
     processing: ProcessingCalculationGroup;
     generation: GenerationCalculationGroup;
 }
