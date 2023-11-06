@@ -8,7 +8,7 @@ export interface EstimationParams {
     generationUtilization: number;
 
     precisionBits: number;
-    quantization: string | null;
+    quantization: string;
 
     batchSize: number | null;
 }
@@ -31,17 +31,32 @@ export interface CalculationGroup {
 
 export interface CalculationValue {
     name?: string;
-    value: number | string;
-    error?: string;
+    value: Value;
+    extra?: string;
     display: ValueDisplay;
 }
 
 
 export interface ValueDisplay {
-    unit?: string;
     label: string;
     info?: string;
 }
+
+export type Value = number | string | {
+    value: number;
+    unit: 'bytes'
+} | {
+    value: number;
+    unit: 'flops'
+} | {
+    value: number;
+    unit: 'dollar'
+    precision?: number;
+} | {
+    value: number;
+    unit: string;
+    precision?: number;
+};
 
 
 export interface ProcessingCalculationGroup {

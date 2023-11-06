@@ -1,7 +1,8 @@
 import {CalculationValue} from "../../schema/calculation";
-import {styled, TableCell, TableContainer, TableRow} from "@mui/material";
+import {styled, TableBody, TableCell, TableContainer, TableRow, Tooltip} from "@mui/material";
 import Table from "@mui/material/Table";
 import React from "react";
+import FormattedValue from "../FormattedValue";
 
 const StyledTableRow = styled(TableRow)(({theme}) => ({
     '&:nth-of-type(odd)': {
@@ -19,15 +20,23 @@ export const DataTable = (
     return (
         <TableContainer>
             <Table aria-label="simple table">
-                {data.map((row) => (
-                    <StyledTableRow
-                        hover
-                        key={row.name}
-                    >
-                        <TableCell align="left">{row.display.label}</TableCell>
-                        <TableCell align="right">{row.value}</TableCell>
-                    </StyledTableRow>
-                ))}
+                <TableBody>
+                    {data.map((row, i) => (
+                        <StyledTableRow
+                            hover
+                            key={i}
+                        >
+                            <TableCell align="left">
+                                <Tooltip title={row.display.info}>
+                                    <span style={{textDecoration: "underline dotted grey"}}>{row.display.label}</span>
+                                </Tooltip>
+                            </TableCell>
+                            <TableCell align="right">
+                                <FormattedValue value={row.value} />
+                            </TableCell>
+                        </StyledTableRow>
+                    ))}
+                </TableBody>
             </Table>
         </TableContainer>
     )

@@ -2,69 +2,47 @@ import React from "react";
 import {Accordion, AccordionDetails, AccordionSummary, Box, Typography} from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import {useEstimationContext} from "../../providers/EstimationProvider";
+import MetricGroupPanel from "../../components/MetricGroupPanel";
+import FormattedValue from "../../components/FormattedValue";
 
 
 function CostsPanel() {
     const {calculation: {processing, generation}} = useEstimationContext();
 
+    console.log(processing, generation)
+
     return (
         <React.Fragment>
-
-            <Accordion>
-                <AccordionSummary aria-controls="panel1d-content" id="panel1d-header"
-                                  expandIcon={<ExpandMoreIcon/>}>
-                    <Box sx={{ width: '66%', flexShrink: 0 }}>
-                        <Typography display="inline">
-                            Input Cost
-                        </Typography>
-                    </Box>
-
+            <MetricGroupPanel
+                title="Input Cost"
+                subtitle={
                     <Box>
                         <Typography sx={{ color: 'text.secondary' }} display="inline">
-                            ${generation.costPer1KTokens}
+                            <FormattedValue value={{value: processing.costPer1KTokens, unit: 'dollar', precision: 5}} />
                         </Typography>
                         {' '}
                         <Typography sx={{ color: 'text.secondary' }} display="inline" variant="caption">
                             /1k Tokens
                         </Typography>
                     </Box>
-                </AccordionSummary>
-                <AccordionDetails>
-                    <Typography>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                        malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor
-                        sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                        sit amet blandit leo lobortis eget.
-                    </Typography>
-                </AccordionDetails>
-            </Accordion>
-            <Accordion>
-                <AccordionSummary aria-controls="panel1d-content" id="panel1d-header"
-                                  expandIcon={<ExpandMoreIcon/>}>
-                    <Box sx={{ width: '66%', flexShrink: 0 }}>
-                        <Typography display="inline">
-                            Output Cost
-                        </Typography>
-                    </Box>
+                }
+                data={processing.calculations}
+            />
+            <MetricGroupPanel
+                title="Output Cost"
+                subtitle={
                     <Box>
                         <Typography sx={{ color: 'text.secondary' }} display="inline">
-                            ${processing.costPer1KTokens}
+                            <FormattedValue value={{value: generation.costPer1KTokens, unit: 'dollar', precision: 5}} />
                         </Typography>
                         {' '}
                         <Typography sx={{ color: 'text.secondary' }} display="inline" variant="caption">
                             /1k Tokens
                         </Typography>
                     </Box>
-                </AccordionSummary>
-                <AccordionDetails>
-                    <Typography>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                        malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor
-                        sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                        sit amet blandit leo lobortis eget.
-                    </Typography>
-                </AccordionDetails>
-            </Accordion>
+                }
+                data={generation.calculations}
+            />
         </React.Fragment>
     )
 }

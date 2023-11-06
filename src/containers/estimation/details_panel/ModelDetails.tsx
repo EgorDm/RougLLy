@@ -15,15 +15,18 @@ import {useEstimationContext} from "../../../providers/EstimationProvider";
 import {Model} from "../../../schema/components";
 import {CalculationValue} from "../../../schema/calculation";
 import {DataTable} from "../../../components/data/DataTable";
+import MetricGroupPanel from "../../../components/MetricGroupPanel";
 
 function createModelCalculatedValues(model: Model): CalculationValue[] {
     return [
         {
-            value: model.parameterCount,
+            value: {
+                value: model.parameterCount,
+                unit: 'bignumber'
+            },
             display: {
                 label: 'Model Parameter Count',
                 info: 'The number of parameters in the model. This is the number of weights in the model.',
-                unit: 'bignumber'
             }
         },
         {
@@ -78,17 +81,10 @@ export const ModelDetails = () => {
     const calculatedValues = createModelCalculatedValues(model);
 
     return (
-        <Accordion>
-            <AccordionSummary aria-controls="panel1d-content" id="panel1d-header"
-                              expandIcon={<ExpandMoreIcon/>}>
-                <Stack flexDirection="row" flex={1} sx={{pr: 4}}>
-                    <Typography flex={2}>Model Details</Typography>
-                    <Typography flex={1} fontWeight={'bold'}>{model.name}</Typography>
-                </Stack>
-            </AccordionSummary>
-            <AccordionDetails sx={{pl: 0, pr: 0}}>
-                <DataTable data={calculatedValues}/>
-            </AccordionDetails>
-        </Accordion>
+        <MetricGroupPanel
+            title={'Model Details'}
+            subtitle={`${model.name}`}
+            data={calculatedValues}
+        />
     )
 }

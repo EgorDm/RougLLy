@@ -19,7 +19,7 @@ export const EstimationProvider = ({children}: { children: React.ReactNode }) =>
         generationUtilization: 0.7,
 
         precisionBits: 16,
-        quantization: null,
+        quantization: 'none',
 
         batchSize: null,
     });

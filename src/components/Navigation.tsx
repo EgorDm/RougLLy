@@ -21,8 +21,7 @@ function Navigation() {
     const routeMatch = useRouteMatch([
         '/estimation', '/models', '/instances', '/gpus', '/comparison'
     ]);
-    const currentTab = routeMatch?.pattern?.path;
-
+    const currentTab = routeMatch?.pattern?.path ?? '/estimation';
 
     return (
         <Container maxWidth="md" sx={{position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 1000, pl: 0, pr: 0}}>

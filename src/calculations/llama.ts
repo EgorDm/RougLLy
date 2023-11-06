@@ -18,7 +18,7 @@ export const calculateLLaMA: CalculationFn = (
 
     const precisionBytes = precisionBits / 8;
     const modelSizeBytes = model.parameterCount * precisionBytes;
-    const cacheSizeAvailableBytes = totalVRAM - modelSizeBytes;
+    const cacheSizeAvailableBytes = Math.max(totalVRAM - modelSizeBytes, 0);
 
     const forwardPassFlops = 4 * model.hiddenDimSize * model.numHiddenLayers * model.maxSeqLength * 2;
     const memoryBandwidthForModelWeights = modelSizeBytes;
@@ -51,33 +51,41 @@ export const calculateLLaMA: CalculationFn = (
                 name: 'Calculation Constants',
                 calculations: [
                     {
-                        value: precisionBytes,
-                        display: {
+                        value: {
+                            value: precisionBytes,
                             unit: "bytes",
+                        },
+                        display: {
                             label: "Precision Bytes",
                             info: "The number of bytes required to store a single precision floating point number."
                         }
                     },
                     {
-                        value: modelSizeBytes,
-                        display: {
+                        value: {
+                            value: modelSizeBytes,
                             unit: "bytes",
+                        },
+                        display: {
                             label: "Model Size",
                             info: "The number of bytes required to store the model."
                         }
                     },
                     {
-                        value: totalVRAM,
-                        display: {
+                        value: {
+                            value: totalVRAM,
                             unit: "bytes",
+                        },
+                        display: {
                             label: "Total VRAM",
                             info: "The total amount of VRAM available on the instance."
                         }
                     },
                     {
-                        value: cacheSizeAvailableBytes,
-                        display: {
+                        value: {
+                            value: cacheSizeAvailableBytes,
                             unit: "bytes",
+                        },
+                        display: {
                             label: "VRAM Available for Cache",
                             info: "The amount of VRAM available for the KV cache."
                         }
@@ -85,7 +93,6 @@ export const calculateLLaMA: CalculationFn = (
                     {
                         value: recommendedBatchSize,
                         display: {
-                            unit: "bytes",
                             label: "Recommended Batch Size",
                             info: "The recommended batch size for optimal utilization of the instance."
                         }
@@ -96,41 +103,51 @@ export const calculateLLaMA: CalculationFn = (
                 name: "Compute and Memory Requirements",
                 calculations: [
                     {
-                        value: forwardPassFlops,
+                        value: {
+                            value: forwardPassFlops,
+                            unit: "flops",
+                        },
                         display: {
-                            unit: "FLOPs",
                             label: "Forward Pass FLOPs",
                             info: "The number of floating point operations required to perform a forward pass of the model."
                         }
                     },
                     {
-                        value: memoryBandwidthForModelWeights,
-                        display: {
+                        value: {
+                            value: memoryBandwidthForModelWeights,
                             unit: "bytes",
+                        },
+                        display: {
                             label: "Memory Bandwidth for Model Weights",
                             info: "The amount of memory bandwidth required to perform a forward pass."
                         }
                     },
                     {
-                        value: processingMemoryPerTokenBytes,
-                        display: {
+                        value: {
+                            value: processingMemoryPerTokenBytes,
                             unit: "bytes",
+                        },
+                        display: {
                             label: "Memory Per Token (for Prompt Processing)",
                             info: "The amount of memory required per token for processing the prompt."
                         }
                     },
                     {
-                        value: tokenKVCacheSizeBytes,
-                        display: {
+                        value: {
+                            value: tokenKVCacheSizeBytes,
                             unit: "bytes",
+                        },
+                        display: {
                             label: "Token KV Cache Size",
                             info: "The amount of memory required to store the key and value vectors for each token."
                         }
                     },
                     {
-                        value: memoryRequirementGeneration,
-                        display: {
+                        value: {
+                            value: memoryRequirementGeneration,
                             unit: "bytes",
+                        },
+                        display: {
                             label: "Memory Requirement (for Generation)",
                             info: "The amount of memory required to perform generation."
                         }
@@ -141,17 +158,21 @@ export const calculateLLaMA: CalculationFn = (
         processing: {
             calculations: [
                 {
-                    value: processingComputeBandwidthRequirement,
-                    display: {
+                    value: {
+                        value: processingComputeBandwidthRequirement,
                         unit: "bytes",
+                    },
+                    display: {
                         label: "Compute Bandwidth per Token",
                         info: "The amount of compute FLOPs bandwidth required to perform a forward pass."
                     }
                 },
                 {
-                    value: processingComputeBoundThreshold,
-                    display: {
+                    value: {
+                        value: processingComputeBoundThreshold,
                         unit: "tokens",
+                    },
+                    display: {
                         label: "Compute Bound Threshold",
                         info: "The number of tokens after which prompt processing becomes compute bound."
                     }
@@ -163,26 +184,34 @@ export const calculateLLaMA: CalculationFn = (
         generation: {
             calculations: [
                 {
-                    value: generationLatency,
-                    display: {
+                    value: {
+                        value: generationLatency,
                         unit: "seconds",
+                    },
+                    display: {
                         label: "Generation Latency",
                         info: "How long it takes until the first token is generated. (i.e. time it takes to process the prompt)"
                     }
                 },
                 {
-                    value: generationThroughputSingle,
-                    display: {
+                    value: {
+                        value: generationThroughputSingle,
                         unit: "tokens/second",
+                        precision: 2
+                    },
+                    display: {
                         label: "Generation Throughput (Single)",
                         info: "The number of tokens that can be generated per second for single generation."
                     }
                 },
                 {
-                    value: generationCostSingle,
+                    value: {
+                        value: generationCostSingle,
+                        unit: "dollar",
+                        precision: 5,
+                    },
                     display: {
-                        unit: "dollar/1k tokens",
-                        label: "Generation Cost (Single)",
+                        label: "Generation Cost (Single) per 1k Tokens",
                         info: "The number of tokens that can be generated per dollar for single generation."
                     }
                 },
