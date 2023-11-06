@@ -10,6 +10,8 @@ export interface Model {
 
     numHiddenLayers: number;
     numKeyValueHeads: number;
+
+    locked?: boolean;
 }
 
 

@@ -41,6 +41,7 @@ import InstancesPage from "./pages/InstancesPage";
 import GpusPage from "./pages/GpusPage";
 import ComparisonPage from "./pages/ComparisonPage";
 import Layout from "./components/Layout";
+import {EntitiesProvider} from "./providers/EntitiesProvider";
 
 
 function Router(props: { children?: React.ReactNode }) {
@@ -54,17 +55,20 @@ function Router(props: { children?: React.ReactNode }) {
 
 function App() {
     return (
+
         <Router>
-            <Routes>
-                <Route path="/" element={<Layout/>}>
-                    <Route index element={<EstimationPage/>}/>
-                    <Route path="estimation" element={<EstimationPage/>}/>
-                    <Route path="models" element={<ModelsPage/>}/>
-                    <Route path="instances" element={<InstancesPage/>}/>
-                    <Route path="gpus" element={<GpusPage/>}/>
-                    <Route path="comparison" element={<ComparisonPage/>}/>
-                </Route>
-            </Routes>
+            <EntitiesProvider>
+                <Routes>
+                    <Route path="/" element={<Layout/>}>
+                        <Route index element={<EstimationPage/>}/>
+                        <Route path="estimation" element={<EstimationPage/>}/>
+                        <Route path="models" element={<ModelsPage/>}/>
+                        <Route path="instances" element={<InstancesPage/>}/>
+                        <Route path="gpus" element={<GpusPage/>}/>
+                        <Route path="comparison" element={<ComparisonPage/>}/>
+                    </Route>
+                </Routes>
+            </EntitiesProvider>
         </Router>
     )
 }

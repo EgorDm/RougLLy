@@ -3,12 +3,14 @@ import React from "react";
 import {INSTANCES} from "../../../constants";
 import {useEstimationContext} from "../../../providers/EstimationProvider";
 import {Instance} from "../../../schema/components";
+import {useEntitiesContext} from "../../../providers/EntitiesProvider";
 
 
 export const InstanceSelection = () => {
-    const options = INSTANCES;
 
     const {params, setParams} = useEstimationContext();
+    const {instances} = useEntitiesContext();
+
 
     const onChange = (event: any, value: Instance | null) => {
         if (value) {
@@ -23,7 +25,7 @@ export const InstanceSelection = () => {
         <Autocomplete
             disablePortal
             value={params.instance}
-            options={options}
+            options={instances}
             getOptionLabel={(option) => `${option.provider} ${option.name}`}
             renderInput={(params) => <TextField {...params} label="Instance"/>}
             onChange={onChange}

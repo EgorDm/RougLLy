@@ -1,4 +1,5 @@
 import {Gpu, Instance, Model} from "./schema/components";
+import exp from "constants";
 
 
 export const MODELS: Model[] = [
@@ -11,6 +12,7 @@ export const MODELS: Model[] = [
         numAttentionHeads: 64,
         numHiddenLayers: 80,
         numKeyValueHeads: 8,
+        locked: true,
     },
     {
         name: 'LLaMA 2 13B',
@@ -21,7 +23,7 @@ export const MODELS: Model[] = [
         numAttentionHeads: 40,
         numHiddenLayers: 40,
         numKeyValueHeads: 40,
-
+        locked: true,
     },
     {
         name: 'LLaMA 2 7B',
@@ -74,6 +76,14 @@ const GPU_H100_PCIE: Gpu = {
     fp16MatmulFlops: 1513e12,
     memoryBandwidth: 2000e9,
 }
+
+export const GPUS: Gpu[] = [
+    GPU_A100_40G,
+    GPU_A100_80G_SXM,
+    GPU_A100_80G_PCIE,
+    GPU_H100_SXM,
+    GPU_H100_PCIE,
+]
 
 export const INSTANCES: Instance[] = [
     {
