@@ -46,7 +46,7 @@ function SaveConfigurationButton() {
         ])
 
         setOpen(true);
-    }, [configurations, params]);
+    }, [configurations, params, calculation]);
 
     const openComparison = useCallback(() => {
         navigate('/comparison')

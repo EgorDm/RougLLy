@@ -7,10 +7,9 @@ import {
     GridValidRowModel,
 } from '@mui/x-data-grid';
 import EditTable from "../components/data/EditTable";
-import {NEW_CONFIGURATION, NEW_MODEL} from "../constants";
-import SaveIcon from "@mui/icons-material/Save";
+import {NEW_CONFIGURATION} from "../constants";
 import ReceiptIcon from '@mui/icons-material/Receipt';
-import {useNavigate, useNavigation, useSearchParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 const COLUMNS: GridColDef[] = [
     {

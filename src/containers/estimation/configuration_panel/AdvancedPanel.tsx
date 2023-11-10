@@ -2,14 +2,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import {
     Accordion as MuiAccordion,
     AccordionDetails, AccordionProps, AccordionSummary as MuiAccordionSummary, AccordionSummaryProps,
-    Box, Checkbox,
-    FormControl, FormControlLabel, InputAdornment,
-    InputLabel,
-    MenuItem,
-    Select,
-    Slider,
-    Stack, styled, TextField,
-    Typography
+    Stack, styled, Typography
 } from "@mui/material";
 import React from "react";
 import QuantizationSelector from "../../../components/input/QuantizationSelector";

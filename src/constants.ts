@@ -1,5 +1,4 @@
 import {Gpu, Instance, Model} from "./schema/components";
-import exp from "constants";
 import {Configuration} from "./schema/comparison";
 
 

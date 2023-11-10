@@ -1,8 +1,7 @@
 import React from "react";
 import {useEstimationContext} from "../../../providers/EstimationProvider";
-import {Gpu, Model} from "../../../schema/components";
+import {Gpu} from "../../../schema/components";
 import {CalculationValue} from "../../../schema/calculation";
-import {DataTable} from "../../../components/data/DataTable";
 import MetricGroupPanel from "../../../components/MetricGroupPanel";
 
 function createModelCalculatedValues(gpu: Gpu): CalculationValue[] {

@@ -2,7 +2,7 @@ import React, {useEffect, useMemo} from "react";
 import {Calculation, EstimationParams} from "../schema/calculation";
 import {INSTANCES, MODELS} from "../constants";
 import calculations from "../calculations";
-import {useLocation, useParams} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 
 
 const EstimationContext = React.createContext<{

@@ -1,5 +1,4 @@
 import React, {useMemo, useState} from "react";
-import {Calculation, EstimationParams} from "../schema/calculation";
 import {Gpu, Instance, Model} from "../schema/components";
 import {CONFIGURATIONS, GPUS, INSTANCES, MODELS} from "../constants";
 import {useLocalStorage} from "../hooks/useLocalStorage";

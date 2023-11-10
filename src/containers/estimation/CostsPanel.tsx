@@ -1,6 +1,5 @@
 import React from "react";
-import {Accordion, AccordionDetails, AccordionSummary, Box, Typography} from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import {Box, Typography} from "@mui/material";
 import {useEstimationContext} from "../../providers/EstimationProvider";
 import MetricGroupPanel from "../../components/MetricGroupPanel";
 import FormattedValue from "../../components/FormattedValue";

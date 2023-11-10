@@ -1,16 +1,7 @@
 import {
-    Accordion as MuiAccordion,
-    AccordionDetails, AccordionProps, AccordionSummary as MuiAccordionSummary, AccordionSummaryProps,
-    Autocomplete,
-    Box, Checkbox,
-    Container,
-    FormControl, FormControlLabel, InputAdornment, InputLabel, MenuItem, Select,
-    Slider,
-    Stack, styled,
-    TextField,
-    Typography
+    Box, Container,
+    Stack
 } from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import React from "react";
 import {ModelSelection} from "./ModelSelection";
 import {InstanceSelection} from "./InstanceSelection";

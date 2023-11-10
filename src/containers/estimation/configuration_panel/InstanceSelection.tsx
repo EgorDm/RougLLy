@@ -1,6 +1,5 @@
 import {Autocomplete, TextField} from "@mui/material";
 import React from "react";
-import {INSTANCES} from "../../../constants";
 import {useEstimationContext} from "../../../providers/EstimationProvider";
 import {Instance} from "../../../schema/components";
 import {useEntitiesContext} from "../../../providers/EntitiesProvider";
