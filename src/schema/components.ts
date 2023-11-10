@@ -1,4 +1,7 @@
+import {EstimationParams} from "./calculation";
+
 export interface Model {
+    id?: number;
     name: string;
     family: string;
 
@@ -16,6 +19,7 @@ export interface Model {
 
 
 export interface Instance {
+    id?: number;
     provider: string;
     name: string;
 
@@ -23,14 +27,18 @@ export interface Instance {
     gpuCount: number;
 
     pricePerHour: number;
+
+    locked?: boolean;
 }
 
 export interface Gpu {
+    id?: number;
     vendor: string;
     model: string;
     memory: number;
     fp16MatmulFlops: number;
     memoryBandwidth: number;
-}
 
+    locked?: boolean;
+}
 
