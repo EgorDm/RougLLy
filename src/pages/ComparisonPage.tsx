@@ -2,11 +2,15 @@ import * as React from 'react';
 import {useEntitiesContext} from "../providers/EntitiesProvider";
 import {Stack, Typography} from "@mui/material";
 import {
-    GridColDef,
+    GridActionsCellItem,
+    GridColDef, GridRowParams,
     GridValidRowModel,
 } from '@mui/x-data-grid';
 import EditTable from "../components/data/EditTable";
 import {NEW_CONFIGURATION, NEW_MODEL} from "../constants";
+import SaveIcon from "@mui/icons-material/Save";
+import ReceiptIcon from '@mui/icons-material/Receipt';
+import {useNavigate, useNavigation, useSearchParams} from "react-router-dom";
 
 const COLUMNS: GridColDef[] = [
     {
@@ -30,6 +34,25 @@ const COLUMNS: GridColDef[] = [
 
 function ComparisonPage() {
     const {configurations, setConfigurations} = useEntitiesContext();
+    const navigate = useNavigate()
+
+    const onOpenEstimator = (params: GridRowParams) => {
+        navigate('/estimation', {state: {params: params.row.params}})
+    }
+
+    const customActions = (params: GridRowParams & { isInEditMode: boolean}) => {
+        if (params.row.locked || !params.isInEditMode) {
+            return []
+        }
+
+        return [
+            <GridActionsCellItem
+                icon={<ReceiptIcon/>}
+                label="View in Estimator"
+                onClick={() => onOpenEstimator(params)}
+            />,
+        ]
+    }
 
     return (
         <Stack flexDirection="column" sx={{flex: 1}}>
@@ -44,6 +67,7 @@ function ComparisonPage() {
                 columns={COLUMNS}
                 modelName="Configuration"
                 newRow={NEW_CONFIGURATION}
+                customActionsDef={customActions}
             />
         </Stack>
     );

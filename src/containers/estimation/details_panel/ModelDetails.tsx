@@ -1,20 +1,7 @@
-import {
-    Accordion,
-    AccordionDetails,
-    AccordionSummary,
-    Paper,
-    Stack, styled,
-    TableBody, TableCell,
-    TableContainer, TableRow,
-    Typography
-} from "@mui/material";
-import Table from '@mui/material/Table';
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import React from "react";
 import {useEstimationContext} from "../../../providers/EstimationProvider";
 import {Model} from "../../../schema/components";
 import {CalculationValue} from "../../../schema/calculation";
-import {DataTable} from "../../../components/data/DataTable";
 import MetricGroupPanel from "../../../components/MetricGroupPanel";
 
 function createModelCalculatedValues(model: Model): CalculationValue[] {

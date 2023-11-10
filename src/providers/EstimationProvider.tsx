@@ -1,7 +1,8 @@
-import React, {useMemo} from "react";
+import React, {useEffect, useMemo} from "react";
 import {Calculation, EstimationParams} from "../schema/calculation";
 import {INSTANCES, MODELS} from "../constants";
 import calculations from "../calculations";
+import {useLocation, useParams} from "react-router-dom";
 
 
 const EstimationContext = React.createContext<{
@@ -23,6 +24,15 @@ export const EstimationProvider = ({children}: { children: React.ReactNode }) =>
 
         batchSize: null,
     });
+
+    const location = useLocation();
+
+    useEffect(() => {
+        if (location?.state?.params) {
+            console.debug('Setting params', location?.state?.params)
+            setParams({...params, ...location?.state?.params})
+        }
+    }, [location?.state])
 
     const calculation = useMemo(() => {
         const calculator = calculations[params.model.family];

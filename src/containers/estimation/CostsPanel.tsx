@@ -9,8 +9,6 @@ import FormattedValue from "../../components/FormattedValue";
 function CostsPanel() {
     const {calculation: {processing, generation}} = useEstimationContext();
 
-    console.log(processing, generation)
-
     return (
         <React.Fragment>
             <MetricGroupPanel

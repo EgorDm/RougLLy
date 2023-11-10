@@ -3,7 +3,7 @@ import {
     DataGrid, GridActionsCellItem,
     gridClasses, GridColDef,
     GridEventListener, GridRowEditStopReasons, GridRowId,
-    GridRowModel, GridRowModes, GridRowModesModel,
+    GridRowModel, GridRowModes, GridRowModesModel, GridRowParams,
     GridRowsProp, GridToolbarContainer,
     GridValidRowModel
 } from "@mui/x-data-grid";
@@ -32,10 +32,11 @@ interface EditTableProps {
     columns: GridColDef[],
     modelName?: string,
     newRow?: GridRowModel,
+    customActionsDef?: (row: GridRowParams & { isInEditMode: boolean}) => React.ReactNode[],
 }
 
 function EditTable(
-    {setRows, rows, columns: dataColumns, modelName, newRow}: EditTableProps
+    {setRows, rows, columns: dataColumns, modelName, newRow, customActionsDef}: EditTableProps
 ) {
     const [rowModesModel, setRowModesModel] = React.useState<GridRowModesModel>({});
 
@@ -45,13 +46,17 @@ function EditTable(
         headerName: 'Actions',
         width: 100,
         cellClassName: 'actions',
-        getActions: ({id}) => {
+        getActions: (params) => {
+            const {id} = params;
             const isInEditMode = rowModesModel[id]?.mode === GridRowModes.Edit;
 
             const editRow = rows.find((row) => row.id === id);
 
+            const customActions: any[] = customActionsDef ? customActionsDef({...params, isInEditMode}) : [];
+
             if (isInEditMode) {
                 return [
+                    ...customActions,
                     <GridActionsCellItem
                         icon={<SaveIcon/>}
                         label="Save"
@@ -69,6 +74,7 @@ function EditTable(
             }
 
             return [
+                ...customActions,
                 <GridActionsCellItem
                     icon={<EditIcon/>}
                     label="Edit"

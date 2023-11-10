@@ -27,6 +27,9 @@ export const ModelSelection = () => {
             getOptionLabel={(option) => option.name}
             renderInput={(params) => <TextField {...params} label="Model"/>}
             onChange={onChange}
+            isOptionEqualToValue={
+                (option, value) => `${option.family}/${option.name}` === `${value.family}/${value.name}`
+            }
         />
     )
 }

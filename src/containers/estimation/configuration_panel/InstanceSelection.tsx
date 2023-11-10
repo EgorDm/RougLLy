@@ -29,6 +29,9 @@ export const InstanceSelection = () => {
             getOptionLabel={(option) => `${option.provider} ${option.name}`}
             renderInput={(params) => <TextField {...params} label="Instance"/>}
             onChange={onChange}
+            isOptionEqualToValue={
+                (option, value) => `${option.provider}/${option.name}` === `${value.provider}/${value.name}`
+            }
         />
     )
 }

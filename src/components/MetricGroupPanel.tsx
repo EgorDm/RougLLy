@@ -39,7 +39,7 @@ const MetricGroupPanel = ({title, subtitle, data}: {
             <AccordionSummary>
                 <Stack flexDirection="row" flex={1} sx={{pr: 4}}>
                     <Typography flex={2}>{title}</Typography>
-                    {subtitle && <Typography flex={1} fontWeight={'bold'}>{subtitle}</Typography>}
+                    {subtitle && <Typography flex={1} component="div" fontWeight={'bold'}>{subtitle}</Typography>}
                 </Stack>
             </AccordionSummary>
             <AccordionDetails sx={{pl: 0, pr: 0, pt: 0, pb: 0}}>

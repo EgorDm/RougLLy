@@ -2,10 +2,11 @@ import ConfigurationPanel from "../containers/estimation/configuration_panel/Con
 import {Box, Divider, IconButton, Paper, Stack} from "@mui/material";
 import DetailsPanel from "../containers/estimation/details_panel/DetailsPanel";
 import CostsPanel from "../containers/estimation/CostsPanel";
-import React from "react";
+import React, {useEffect} from "react";
 import {EstimationProvider} from "../providers/EstimationProvider";
 import Grid from '@mui/material/Unstable_Grid2';
 import SaveConfigurationButton from "../components/input/SaveConfigurationButton";
+import {useParams} from "react-router-dom";
 
 function EstimationPage() {
     return (
