@@ -19,7 +19,11 @@ function Router(props: { children?: React.ReactNode }) {
     if (typeof window === 'undefined') {
         return <StaticRouter location="/">{children}</StaticRouter>
     } else {
-        return <BrowserRouter>{children}</BrowserRouter>
+        if (process.env.NODE_ENV === 'production') {
+            return <BrowserRouter basename="/RougLLy">{children}</BrowserRouter>
+        } else {
+            return <BrowserRouter basename="/">{children}</BrowserRouter>
+        }
     }
 }
 
