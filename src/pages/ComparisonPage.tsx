@@ -13,9 +13,8 @@ import {useNavigate} from "react-router-dom";
 
 const COLUMNS: GridColDef[] = [
     {
-        field: 'vendor', headerName: 'Vendor', width: 140, editable: true,
+        field: 'name', headerName: 'Name', width: 240, editable: true,
     },
-    {field: 'model', headerName: 'Model', width: 130, editable: true},
     {field: 'size', headerName: '# Parameters', flex: 1, editable: true},
     {
         field: 'maxSeqLength', headerName: 'Seq Length', flex: 1, editable: true,
@@ -58,6 +57,8 @@ function ComparisonPage() {
             <Stack sx={{pl: 2, pr: 2}}>
                 <Typography variant="h6">Configurations</Typography>
                 <Typography sx={{fontSize: 14}} color="text.secondary" gutterBottom>
+                    Configurations are the combination of a model and an instance.<br/>
+                    They are used to determine the cost of running a model on an instance.
                 </Typography>
             </Stack>
             <EditTable

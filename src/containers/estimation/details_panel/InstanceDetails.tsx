@@ -1,6 +1,6 @@
 import React from "react";
 import {useEstimationContext} from "../../../providers/EstimationProvider";
-import {Instance, Model} from "../../../schema/components";
+import {Instance} from "../../../schema/components";
 import {CalculationValue} from "../../../schema/calculation";
 import MetricGroupPanel from "../../../components/MetricGroupPanel";
 

@@ -46,8 +46,8 @@ function InstancesPage() {
             <Stack sx={{pl: 2, pr: 2}}>
                 <Typography variant="h6">Instances</Typography>
                 <Typography sx={{fontSize: 14}} color="text.secondary" gutterBottom>
-                    Update the list of models used for cost estimation.<br/>
-                    The family is used to determine the type of model and it's calculation structure.
+                    Instances can be used to run the models.<br/>
+                    While we take the price per hour into account, we do not take things such as SLA and availability into account.
                 </Typography>
             </Stack>
             <EditTable

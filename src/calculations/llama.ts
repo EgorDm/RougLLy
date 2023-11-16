@@ -1,4 +1,5 @@
 import {Calculation, CalculationFn, EstimationParams} from "../schema/calculation";
+import {formatBytes} from "../utils/formatting";
 
 
 export const calculateLLaMA: CalculationFn = (
@@ -33,6 +34,7 @@ export const calculateLLaMA: CalculationFn = (
     const batchTotalKVCacheSizeBytes = sequenceKVCacheSizeBytes * batchSize;
 
     const memoryRequirementGeneration = modelSizeBytes + batchTotalKVCacheSizeBytes;
+    const minMemoryRequirementGeneration = modelSizeBytes + sequenceKVCacheSizeBytes;
 
     const processingComputeBandwidthRequirement = modelSizeBytes;
     const processingComputeBoundThreshold = totalFp16MatmulFlopsAdjusted / processingComputeBandwidthRequirement;
@@ -50,6 +52,7 @@ export const calculateLLaMA: CalculationFn = (
         groups: [
             {
                 name: 'Calculation Constants',
+                subtitle: `Batch Size: ${batchSize}`,
                 calculations: [
                     {
                         value: {
@@ -102,6 +105,7 @@ export const calculateLLaMA: CalculationFn = (
             },
             {
                 name: "Compute and Memory Requirements",
+                subtitle: `Min VRAM: ${formatBytes(minMemoryRequirementGeneration)}`,
                 calculations: [
                     {
                         value: {

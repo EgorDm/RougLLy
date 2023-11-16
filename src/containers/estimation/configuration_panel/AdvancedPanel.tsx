@@ -52,7 +52,7 @@ export function AdvancedPanel() {
     }
 
     return (
-        <Accordion variant={'outlined'}>
+        <Accordion variant={'outlined'} sx={{mt: 2}}>
             <AccordionSummary>
                 <Typography>Advanced Settings</Typography>
             </AccordionSummary>

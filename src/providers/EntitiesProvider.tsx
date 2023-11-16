@@ -1,4 +1,4 @@
-import React, {useMemo, useState} from "react";
+import React, {useMemo} from "react";
 import {Gpu, Instance, Model} from "../schema/components";
 import {CONFIGURATIONS, GPUS, INSTANCES, MODELS} from "../constants";
 import {useLocalStorage} from "../hooks/useLocalStorage";

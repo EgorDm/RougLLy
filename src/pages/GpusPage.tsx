@@ -1,7 +1,7 @@
 import React from "react";
 import {useEntitiesContext} from "../providers/EntitiesProvider";
 import {GridColDef, GridValidRowModel} from "@mui/x-data-grid";
-import {Stack} from "@mui/material";
+import {Stack, Typography} from "@mui/material";
 import EditTable from "../components/data/EditTable";
 import {formatBytes, formatFlops} from "../utils/formatting";
 import {NEW_GPU} from "../constants";
@@ -32,6 +32,13 @@ function GpusPage() {
 
     return (
         <Stack flexDirection="column" sx={{flex: 1}}>
+            <Stack sx={{pl: 2, pr: 2}}>
+                <Typography variant="h6">GPUs</Typography>
+                <Typography sx={{fontSize: 14}} color="text.secondary" gutterBottom>
+                    GPUs specs determine if they can run a model and how fast the inference is.<br/>
+                    Because generation is memory bound, the memory bandwidth is important.
+                </Typography>
+            </Stack>
             <EditTable
                 rows={gpus}
                 setRows={setGpus as (rows: GridValidRowModel[]) => void}

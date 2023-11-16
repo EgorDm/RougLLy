@@ -47,7 +47,7 @@ function ModelsPage() {
             <Stack sx={{pl: 2, pr: 2}}>
                 <Typography variant="h6">Models</Typography>
                 <Typography sx={{fontSize: 14}} color="text.secondary" gutterBottom>
-                    Update the list of models used for cost estimation.<br/>
+                    Models and their parameters are a big factor during cost estimation.<br/>
                     The family is used to determine the type of model and it's calculation structure.
                 </Typography>
             </Stack>

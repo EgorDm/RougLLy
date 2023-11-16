@@ -38,6 +38,18 @@ export const MODELS: Model[] = [
         numHiddenLayers: 32,
         numKeyValueHeads: 32,
         locked: true,
+    },
+    {
+        id: 4,
+        name: 'Mistral 7B',
+        family: 'Mistral',
+        parameterCount: 7e9,
+        maxSeqLength: 8192,
+        hiddenDimSize: 4096,
+        numAttentionHeads: 32,
+        numHiddenLayers: 32,
+        numKeyValueHeads: 8,
+        locked: true,
     }
 ]
 
@@ -167,8 +179,7 @@ export const NEW_INSTANCE: Instance = {
 export const CONFIGURATIONS: Configuration[] = [
     {
         id: 1,
-        vendor: 'OpenAI',
-        model: 'gpt-4-1106-preview',
+        name: 'OpenAI (gpt-4-1106-preview)',
         size: '~1.7T',
         maxSeqLength: 128000,
         inputPrice: 0.01,
@@ -178,8 +189,7 @@ export const CONFIGURATIONS: Configuration[] = [
     },
     {
         id: 2,
-        vendor: 'OpenAI',
-        model: 'gpt-3.5-turbo-1106',
+        name: 'OpenAI (gpt-3.5-turbo-1106)',
         size: '~175B',
         maxSeqLength: 16385,
         inputPrice: 0.001,
@@ -189,8 +199,7 @@ export const CONFIGURATIONS: Configuration[] = [
     },
     {
         id: 3,
-        vendor: 'Antropic (AWS Bedrock)',
-        model: 'Claude',
+        name: 'Antropic Claude 2',
         size: '~137B',
         maxSeqLength: 100000,
         inputPrice: 0.011,
@@ -200,20 +209,28 @@ export const CONFIGURATIONS: Configuration[] = [
     },
     {
         id: 4,
-        vendor: 'Google Cloud',
-        model: 'PaLM 2',
+        name: 'Google Cloud (PaLM 2)',
         size: '~340B',
         maxSeqLength: 8000,
         inputPrice: 0.002,
         outputPrice: 0.002,
 
         locked: true,
+    },
+    {
+        id: 100,
+        name: 'OpenAI (Fine-Tuned gpt-3.5-turbo)',
+        size: '~175B',
+        maxSeqLength: 8000,
+        inputPrice: 0.0030,
+        outputPrice: 0.0060,
+
+        locked: true,
     }
 ]
 
 export const NEW_CONFIGURATION: Configuration = {
-    vendor: 'OpenAI',
-    model: 'gpt-5',
+    name: 'OpenAI (gpt-5)',
     size: '~1.7T',
     maxSeqLength: 128000,
     inputPrice: 0.01,

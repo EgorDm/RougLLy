@@ -26,6 +26,7 @@ export interface Calculation {
 
 export interface CalculationGroup {
     name: string;
+    subtitle?: string;
     description?: string;
     calculations: CalculationValue[];
 }

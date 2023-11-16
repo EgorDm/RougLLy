@@ -1,4 +1,16 @@
-import {Alert, Button, IconButton, Snackbar} from "@mui/material";
+import {
+    Alert,
+    Box,
+    Button,
+    Card,
+    CardActions,
+    Dialog, DialogActions, DialogContent,
+    DialogTitle,
+    IconButton,
+    Modal,
+    Snackbar, TextField,
+    Typography
+} from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
 import React, {useCallback} from "react";
 import {useEntitiesContext} from "../../providers/EntitiesProvider";
@@ -11,19 +23,25 @@ function SaveConfigurationButton() {
     const {params, calculation} = useEstimationContext();
     const {setConfigurations, configurations} = useEntitiesContext();
 
-    const [open, setOpen] = React.useState(false);
+    const [snackbarOpen, setSnackbarOpen] = React.useState(false);
+    const [dialogOpen, setDialogOpen] = React.useState(false);
+    const [name, setName] = React.useState('');
 
     const navigate = useNavigate();
 
-    const handleClose = useCallback((event?: React.SyntheticEvent | Event, reason?: string) => {
+    const handleSnackbarClose = useCallback((event?: React.SyntheticEvent | Event, reason?: string) => {
         if (reason === 'clickaway') {
             return;
         }
 
-        setOpen(false);
+        setSnackbarOpen(false);
     }, []);
 
-    const onClick = useCallback(() => {
+    const handleDialogClose = useCallback(() => {
+        setDialogOpen(false);
+    }, []);
+
+    const handleSave = useCallback(() => {
         const nextId = Math.max(...configurations.map((row) => row.id ?? 0)) + 1;
 
         setConfigurations([
@@ -32,8 +50,7 @@ function SaveConfigurationButton() {
                 id: nextId,
                 params,
 
-                vendor: `${params.instance.name} with ${params.model.family}`,
-                model: `${params.model.name} on ${params.instance.name}`,
+                name,
 
                 size: formatScaleUnitNumber(params.model.parameterCount),
                 maxSeqLength: params.model.maxSeqLength,
@@ -45,7 +62,13 @@ function SaveConfigurationButton() {
             }
         ])
 
-        setOpen(true);
+        setSnackbarOpen(true);
+        setDialogOpen(false);
+    }, [configurations, params, calculation, name])
+
+    const onClick = useCallback(() => {
+        setName(`${params.model.name} on ${params.instance.name}`)
+        setDialogOpen(true)
     }, [configurations, params, calculation]);
 
     const openComparison = useCallback(() => {
@@ -55,12 +78,12 @@ function SaveConfigurationButton() {
 
     return (
         <>
-            <IconButton aria-label="save" color="primary" onClick={onClick}>
+            <IconButton aria-label="save" color="default" onClick={onClick}>
                 <SaveIcon/>
             </IconButton>
-            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+            <Snackbar open={snackbarOpen} autoHideDuration={6000} onClose={handleSnackbarClose}>
                 <Alert
-                    onClose={handleClose}
+                    onClose={handleSnackbarClose}
                     severity="success" sx={{width: '100%'}}
                     action={
                         <Button color="secondary" size="small" onClick={openComparison}>
@@ -71,6 +94,29 @@ function SaveConfigurationButton() {
                     We have saved your configuration!
                 </Alert>
             </Snackbar>
+            <Dialog
+                open={dialogOpen}
+                onClose={handleDialogClose}
+            >
+                <DialogTitle>Give your configuration a name</DialogTitle>
+                <DialogContent>
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="name"
+                        label="Name"
+                        type="name"
+                        fullWidth
+                        variant="standard"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                    />
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleDialogClose}>Cancel</Button>
+                    <Button onClick={handleSave} color="success">Save</Button>
+                </DialogActions>
+            </Dialog>
         </>
     )
 }

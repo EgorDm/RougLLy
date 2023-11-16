@@ -1,24 +1,24 @@
 import ConfigurationPanel from "../containers/estimation/configuration_panel/ConfigurationPanel";
-import {Box, Divider, IconButton, Paper, Stack} from "@mui/material";
+import {Box, Button, ButtonGroup, Container, Divider, Paper, Stack} from "@mui/material";
 import DetailsPanel from "../containers/estimation/details_panel/DetailsPanel";
 import CostsPanel from "../containers/estimation/CostsPanel";
-import React, {useEffect} from "react";
+import React from "react";
 import {EstimationProvider} from "../providers/EstimationProvider";
 import Grid from '@mui/material/Unstable_Grid2';
 import SaveConfigurationButton from "../components/input/SaveConfigurationButton";
-import {useParams} from "react-router-dom";
+import SaveIcon from "@mui/icons-material/Save";
 
 function EstimationPage() {
     return (
         <EstimationProvider>
-            <Grid container>
-                <Grid xs={10}>
-                    <ConfigurationPanel/>
-                </Grid>
-                <Grid xs={2}>
-                    <SaveConfigurationButton/>
-                </Grid>
-            </Grid>
+            <Container maxWidth="sm">
+                <Stack direction='row'>
+                    <ConfigurationPanel sx={{flexGrow: 1}}/>
+                    <Stack direction="column" sx={{pl: 2}}>
+                        <SaveConfigurationButton/>
+                    </Stack>
+                </Stack>
+            </Container>
             <Divider sx={{mt: 2, mb: 2}}/>
             <Stack flexGrow={1}>
                 <DetailsPanel/>
